@@ -24,28 +24,27 @@ class ProfileViewModel: ViewModel<ProfileEvent, ProfileState, ProfileEffect> {
 
     // Función privada para manejar el evento onGetUserById
     private func getUserById(_ userId: String) {
-        // Simulando una operación de carga de datos (sin backend por ahora)
         setState { state in
             var updatedState = state
-            updatedState.isLoading = true  // Marcamos que se está cargando
+            updatedState.isLoading = true
             return updatedState
         }
         
-        // Simulando la carga del usuario, después de 2 segundos
+        // Simulando una operación de carga de datos (sin backend por ahora)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.setState { state in
                 var updatedState = state
-                updatedState.isLoading = false  // Ya no estamos cargando
+                updatedState.isLoading = false
                 return updatedState
             }
             
-            // Aquí emitiríamos un efecto de mostrar un modal
-            self.setEffect {
-                ProfileEffect.showModal(message: "User \(userId) loaded successfully!")
-            }
+            // Emitir el efecto de mostrar el modal
+            self.setEffect(ProfileEffect.showModal(message: "User \(userId) loaded successfully!"))
         }
     }
 }
+
+
 
 
 

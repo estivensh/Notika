@@ -11,7 +11,7 @@ import SwiftUI
 struct NotikaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ProfileView(userId: "1")
         }
     }
 }

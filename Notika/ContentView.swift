@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var selection: Set<Int> = [0]
+    @StateObject var profileViewModel = ProfileViewModel()
     
     var body: some View {
         NavigationView {
@@ -41,7 +42,22 @@ struct ContentView: View {
                 }
             }
         }
+        .onAppear {
+            profileViewModel.setEvent(.onGetUserById(userId: ""))
+        }
     }
+}
+
+private func handleEffect(_ effect: ProfileEffect?) -> some View {
+        if let effect = effect {
+            switch effect {
+            case .navigate(_):
+                print("Hola")
+            case .showModal(message: let message):
+                print(message)
+            }
+        }
+        return EmptyView()
 }
 
 struct MessageCell: View {

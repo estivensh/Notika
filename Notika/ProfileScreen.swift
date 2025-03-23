@@ -5,14 +5,22 @@
 //  Created by Estiven Sanchez Herrera on 21/03/25.
 //
 import SwiftUI
+import SwiftData
 
 struct ProfileView: View {
-    @ObservedObject private var profileViewModel = ProfileViewModel()
+    
+    @StateObject private var profileViewModel: NotesViewModel
+    private var items: [Note]
+    
+    init(viewModel: NotesViewModel, items: [Note]) {
+        _profileViewModel = StateObject(wrappedValue: viewModel)
+        self.items = items
+    }
     
     @State private var showModal = false
     @State private var modalMessage = ""
-    
-    let userId: String
+ 
+
     
     var body: some View {
         VStack {
@@ -20,16 +28,16 @@ struct ProfileView: View {
                 ProgressView("Loading...")
                     .progressViewStyle(CircularProgressViewStyle())
             } else {
-                Text("Profile Screen")
-                    .font(.title)
+                List {
+                    ForEach(items){ item in
+                        Text("Hola \(item.title)")
+                    }
+                }
                 
-                Button("Load User Info") {
-                    profileViewModel.setEvent(.onGetUserById(userId: userId))
+                Button("Add note") {
+                    profileViewModel.setEvent(.addNote(note: .init(id: UUID(),title: "hola", body: "jjesje", color: "blue")))
                 }
             }
-        }
-        .onAppear {
-            profileViewModel.setEvent(.onGetUserById(userId: userId))
         }
         .onReceive(profileViewModel.$effect) { newEffect in
             if let effect = newEffect {
@@ -41,7 +49,7 @@ struct ProfileView: View {
         }
     }
     
-    private func handleEffect(_ effect: ProfileEffect) {
+    private func handleEffect(_ effect: NotesEffect) {
         switch effect {
         case .navigate(let destination):
             print("Navigate to: \(destination)")
@@ -52,11 +60,4 @@ struct ProfileView: View {
     }
 }
 
-
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView(userId: "123")
-    }
-}
 

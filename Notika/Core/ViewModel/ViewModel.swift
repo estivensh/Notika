@@ -27,24 +27,20 @@ class ViewModel<Event: UIEvent, State: UIState, Effect: UIEffect>: ObservableObj
         self.state = initialState
     }
 
-    // Método para manejar eventos, que debe ser sobrescrito en los ViewModels concretos
     func handleEvent(_ event: Event) {
         fatalError("handleEvent should be implemented in subclass")
     }
     
-    // Emitir un efecto
     func setEffect(_ effect: Effect) {
         self.effect = effect
     }
 
-    // Cambiar el estado
     func setState(_ update: @escaping (State) -> State) {
         self.state = update(self.state)
     }
     
-    // Despachar eventos
     func setEvent(_ event: Event) {
-        handleEvent(event)  // Llama a la función handleEvent
+        handleEvent(event)
     }
 }
 

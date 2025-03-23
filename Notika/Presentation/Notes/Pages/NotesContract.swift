@@ -7,20 +7,18 @@
 
 import Foundation
 
-protocol HomeContract {}
+protocol NotesContract {}
 
-struct ProfileState: UIState {
+struct NotesState: UIState {
     var isLoading: Bool = false
     var exception: Error? = nil
 }
 
-// Evento
-enum ProfileEvent: UIEvent {
-    case onGetUserById(userId: String)
+enum NotesEvent: UIEvent {
+    case addNote(note: Note)
 }
 
-// Efecto
-enum ProfileEffect: UIEffect, Equatable {
+enum NotesEffect: UIEffect, Equatable {
     case navigate(to: Destination)
     case showModal(message: String)
 }

@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct NotikaApp: App {
     var body: some Scene {
         WindowGroup {
-            ProfileView(userId: "1")
+            ContentView()
         }
+        .modelContainer(for: [Note.self])
     }
 }

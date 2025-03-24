@@ -14,7 +14,7 @@ func Dependencies(modelContext: ModelContext) {
     @Provides var useCase = { NotesUseCase() }
 
     // ViewModels
-    @Provides var artDetailViewModel = { NotesViewModel() }
+    @Provides var artDetailViewModel = { NotesListViewModel() }
     
     // Singletons
     @Singleton var repository: INotesRepository = NotesRepositoryImpl()

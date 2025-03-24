@@ -6,7 +6,3 @@
 //
 
 protocol UIEffect {}
-
-enum BaseEffect: UIEffect {
-    case navigate(destination: Destination)
-}

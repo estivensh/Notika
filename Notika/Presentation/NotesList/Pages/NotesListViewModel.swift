@@ -8,18 +8,19 @@
 import Foundation
 import Combine
 import Inject
+import SwiftUI
 
-class NotesViewModel: ViewModel<NotesEvent, NotesState, NotesEffect> {
+class NotesListViewModel: ViewModel<NotesListEvent, NotesListState, NotesListEffect> {
     
     
     @Inject private var notesUseCase: NotesUseCase
 
     init() {
-        super.init(initialState: NotesState())
+        super.init(initialState: NotesListState())
     }
 
     // Manejo de eventos
-    override func handleEvent(_ event: NotesEvent) {
+    override func handleEvent(_ event: NotesListEvent) {
         switch event {
         case .addNote(let note):
             addNote(note)
@@ -39,7 +40,8 @@ class NotesViewModel: ViewModel<NotesEvent, NotesState, NotesEffect> {
                    switch result {
                    case .success(let result):
                        DispatchQueue.main.async {
-                           self?.setEffect(NotesEffect.showModal(message: "note added successfully!"))
+                           //self?.setEffect(NotesListEffect.navigate(to: AnyView(MyView())))
+                           self?.setEffect(NotesListEffect.showModal(message: "note added successfully!"))
                        }
                    case .failure(let error):
                        DispatchQueue.main.async {

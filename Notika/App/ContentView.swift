@@ -9,17 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Note]
     
-
-    
-  
     var body: some View {
-        // Llama a Dependencies dentro del body
         Dependencies(modelContext: modelContext)
-        
-
-        return ProfileView(items: items)
+        return NotesListPage(items: items)
     }
 }

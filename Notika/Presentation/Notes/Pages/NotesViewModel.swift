@@ -7,14 +7,14 @@
 
 import Foundation
 import Combine
+import Inject
 
 class NotesViewModel: ViewModel<NotesEvent, NotesState, NotesEffect> {
     
     
-    private let notesUseCase: NotesUseCase
+    @Inject private var notesUseCase: NotesUseCase
 
-    init(notesUseCase: NotesUseCase) {
-        self.notesUseCase = notesUseCase
+    init() {
         super.init(initialState: NotesState())
     }
 

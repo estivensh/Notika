@@ -6,13 +6,11 @@
 //
 
 import SwiftUI
+import Inject
 
 public class NotesUseCase {
-    private let repository: INotesRepository
     
-    public init(repository: INotesRepository) {
-        self.repository = repository
-    }
+    @Singleton private var repository: INotesRepository
     
     public func execute(note: Note, completion: @escaping (Result<Void, Error>) -> Void) {
         repository.addNote(for: note, completion: completion)

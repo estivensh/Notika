@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		27D640E72D90F04F0021A648 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 27D640E62D90F04F0021A648 /* Inject */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		27AC61532D8D42F500F34CFF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27D640E72D90F04F0021A648 /* Inject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = Notika;
 			packageProductDependencies = (
+				27D640E62D90F04F0021A648 /* Inject */,
 			);
 			productName = Notika;
 			productReference = 27AC61412D8D42F300F34CFF /* Notika.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 27AC61382D8D42F300F34CFF;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				27D640E52D90F04F0021A648 /* XCRemoteSwiftPackageReference "Inject" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 27AC61422D8D42F300F34CFF /* Products */;
 			projectDirPath = "";
@@ -591,6 +600,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		27D640E52D90F04F0021A648 /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rmichelberger/Inject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		27D640E62D90F04F0021A648 /* Inject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27D640E52D90F04F0021A648 /* XCRemoteSwiftPackageReference "Inject" */;
+			productName = Inject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 27AC61392D8D42F300F34CFF /* Project object */;
 }

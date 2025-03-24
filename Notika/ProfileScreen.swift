@@ -9,11 +9,10 @@ import SwiftData
 
 struct ProfileView: View {
     
-    @StateObject private var profileViewModel: NotesViewModel
+    @StateObject private var profileViewModel: NotesViewModel = NotesViewModel()
     private var items: [Note]
     
-    init(viewModel: NotesViewModel, items: [Note]) {
-        _profileViewModel = StateObject(wrappedValue: viewModel)
+    init(items: [Note]) {
         self.items = items
     }
     

@@ -12,13 +12,14 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Note]
     
+
     
+  
     var body: some View {
-        let localDataSource = LocalNotesDataSource(modelContext: modelContext)
-        let repository = NotesRepositoryImpl(dataSource: localDataSource)
-        let fetchWeatherUseCase = NotesUseCase(repository: repository)
-        let viewModel = NotesViewModel(notesUseCase: fetchWeatherUseCase)
+        // Llama a Dependencies dentro del body
+        Dependencies(modelContext: modelContext)
         
-        ProfileView(viewModel: viewModel, items: items)
+
+        return ProfileView(items: items)
     }
 }

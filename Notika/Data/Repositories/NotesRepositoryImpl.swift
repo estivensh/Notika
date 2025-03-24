@@ -6,14 +6,13 @@
 //
 
 import Foundation
+import Inject
 
 public class NotesRepositoryImpl: INotesRepository {
    
-    private let dataSource: NotesDataSource
+    @Inject private var dataSource: NotesDataSource
     
-    public init(dataSource: NotesDataSource) {
-        self.dataSource = dataSource
-    }
+    
     
     public func addNote(for note: Note, completion: @escaping (Result<Void, any Error>) -> Void) {
         dataSource.addNote(for: note, completion: completion)

@@ -10,6 +10,7 @@ import SwiftUI
 
 @Model
 final public class Note {
+    
     @Attribute(.unique) public var id: UUID
     public var title: String
     public var body: String

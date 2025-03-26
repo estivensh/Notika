@@ -33,9 +33,22 @@
 		27AC615C2D8D42F500F34CFF /* NotikaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotikaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		27D641162D9211710021A648 /* Exceptions for "Notika" folder in "Notika" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			platformFiltersByRelativePath = {
+				Presentation/NotesList/Atoms/BlurView.swift = (ios, );
+			};
+			target = 27AC61402D8D42F300F34CFF /* Notika */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		27AC61432D8D42F300F34CFF /* Notika */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				27D641162D9211710021A648 /* Exceptions for "Notika" folder in "Notika" target */,
+			);
 			path = Notika;
 			sourceTree = "<group>";
 		};

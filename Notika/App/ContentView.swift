@@ -16,5 +16,7 @@ struct ContentView: View {
     var body: some View {
         Dependencies(modelContext: modelContext)
         return NotesListPage(items: items)
+            .buttonStyle(BorderlessButtonStyle())
+            .textFieldStyle(PlainTextFieldStyle())
     }
 }

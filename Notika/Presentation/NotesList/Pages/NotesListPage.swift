@@ -12,6 +12,8 @@ struct NotesListPage: View {
     @State private var destinationView: AnyView? = nil
     @State private var showModal = false
     @State private var modalMessage = ""
+    @State private var showColors = false
+    @State private var animatedButton = false
     private var items: [Note]
     
     init(items: [Note]) {
@@ -19,21 +21,54 @@ struct NotesListPage: View {
     }
     
     var body: some View {
-        NavigationStack {
+
             VStack {
                 if profileViewModel.state.isLoading {
                     ProgressView("Loading...")
                         .progressViewStyle(CircularProgressViewStyle())
                 } else {
-                    List {
-                        ForEach(items) { item in
-                            Text("Hola \(item.title)")
+                    HStack {
+                        if isMacOS() {
+                            Sidebar(showColors: $showColors, animatedButton: $animatedButton){ color in 
+                                profileViewModel.setEffect(.navigate(to: AnyView(AddNotePage(color: color))))
+                            }
+                            Rectangle()
+                                .fill(.gray.opacity(0.15))
+                                .frame(width: 1)
                         }
+                        NavigationStack {
+                            NoteListContent(notes: items)
+                                .navigationDestination(isPresented: Binding(
+                                            get: { destinationView != nil },
+                                            set: { if !$0 { destinationView = nil } }
+                                        )) {
+                                            if let destination = destinationView {
+                                                destination
+                                            }
+                                        }
+                        }
+                        
                     }
+                    #if os(macOS)
+                    .ignoresSafeArea()
+                    #endif
+                    .frame(
+                        width: isMacOS() ? getRect().width / 1.7 : nil,
+                        height: isMacOS() ? getRect().height - 180 : nil,
+                        alignment: .leading
+                    )
+                    .background(Color("BG")
+                    .ignoresSafeArea())
+                    #if os(iOS)
+                    .overlay(Sidebar(showColors: $showColors, animatedButton: $animatedButton){ color in
+                        profileViewModel.setEffect(.navigate(to: AnyView(AddNotePage(color: color))))
+                    })
+                    #endif
+                    .preferredColorScheme(.light)
                     
-                    Button("Add note") {
+                    /*Button("Add note") {
                         profileViewModel.setEvent(.addNote(note: .init(id: UUID(), title: "hola", body: "jjesje", color: "blue")))
-                    }
+                    }*/
                 }
             }
             .onReceive(profileViewModel.$effect) { newEffect in
@@ -44,15 +79,7 @@ struct NotesListPage: View {
             .alert(isPresented: $showModal) {
                 Alert(title: Text("Info"), message: Text(modalMessage), dismissButton: .default(Text("OK")))
             }
-            .navigationDestination(isPresented: Binding(
-                        get: { destinationView != nil },
-                        set: { if !$0 { destinationView = nil } }
-                    )) {
-                        if let destination = destinationView {
-                            destination
-                        }
-                    }
-        }
+
     }
     
     private func handleEffect(_ effect: NotesListEffect) {
@@ -65,6 +92,11 @@ struct NotesListPage: View {
         }
     }
 }
+
+#Preview {
+    NotesListPage(items: [])
+}
+
 
 
 

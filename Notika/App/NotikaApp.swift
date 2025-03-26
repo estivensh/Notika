@@ -16,5 +16,8 @@ struct NotikaApp: App {
             ContentView()
         }
         .modelContainer(for: [Note.self])
+        #if os(macOS)
+        .windowStyle(HiddenTitleBarWindowStyle())
+        #endif
     }
 }
